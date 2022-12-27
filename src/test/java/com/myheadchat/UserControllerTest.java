@@ -135,6 +135,7 @@ public void cleanup(){
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }
 
+
     @Test
     public void postUser_whenUserHasDisplayNameExceedsTheLengthLimit_receiveBadRequest() {
         User user = createValidUser();
@@ -172,7 +173,7 @@ public void cleanup(){
     @Test
     public void postUser_whenUserHasPasswordWithAllNumber_receiveBadRequest() {
         User user = createValidUser();
-        user.setPassword("123456789");
+        user.setPassword("1234567890");
         ResponseEntity<Object> response = postSignup(user, Object.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }

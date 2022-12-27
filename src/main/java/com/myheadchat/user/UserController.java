@@ -3,7 +3,7 @@ package com.myheadchat.user;
 
 import com.myheadchat.errors.ApiError;
 import com.myheadchat.shared.GenericResponse;
-import org.apache.http.MessageConstraintException;
+//import org.apache.http.MessageConstraintException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -19,13 +19,13 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @RestController
-@RequestMapping("/api/1.0")
+//@RequestMapping("/api/1.0")
 public class UserController {
 
      @Autowired
      UserService userService;
 
-     @PostMapping("/users")
+     @PostMapping("api/1.0/users")
       GenericResponse createUser ( @Valid @RequestBody User user){
 //         if (user.getUsername() == null || user.getDisplayName() == null ) {
 //             throw new UserNotValidExeption();     }

@@ -15,9 +15,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@RunWith(SpringRunner.class)
 @DataJpaTest
 @ActiveProfiles("test")
-@RunWith(SpringRunner.class)
 public class UserRepositoryTest {
 
     @Autowired
@@ -29,11 +29,20 @@ public class UserRepositoryTest {
     @Test
     public void findByUsername_whenUserExists_returnsUser() {
 
+     User user = new User();
 
-        testEntityManager.persist(createValidUser());
+        user.setUsername("test-user");
+        user.setDisplayName("test-display");
+        user.setPassword("test-pass");
+
+        testEntityManager.persist(user);
 
         User inDB = userRepository.findByUsername("test-user");
         assertThat(inDB).isNotNull();
-
+    }
+    @Test
+    public void findByUsername_whenUserDoesNotExist_returnsNull() {
+        User inDB = userRepository.findByUsername("nonexistinguser");
+        assertThat(inDB).isNull();
     }
 }
