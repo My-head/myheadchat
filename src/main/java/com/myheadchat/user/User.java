@@ -4,6 +4,9 @@ import java.beans.Transient;
 import java.util.Collection;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.*;
 import net.bytebuddy.implementation.bind.annotation.IgnoreForBinding;
 import org.hibernate.validator.constraints.Normalized;
@@ -29,17 +32,20 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue
     @Column(name = "userid")
+    @JsonView(Views.Base.class)
     private long id;
 
     @Column(name = "user_name")
     @Size(min=4,  max=255)
     @UniqueUsername
+    @JsonView(Views.Base.class)
     @NotNull(message = "{mhc.constraints.username.NotNull.message}")
     private String username;
 
     @NotNull()
     @Column(name = "display_name")
     @Size(min=4, max=255)
+    @JsonView(Views.Base.class)
     private String displayName;
 
     @Column(name = "p4ssword")
@@ -48,7 +54,9 @@ public class User implements UserDetails {
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$" , message = "{mhc.constraints.password.Pattern.message")
     private String password;
 
-
+    @JsonView(Views.Base.class)
+    @Column(name = "image")
+    private String image;
 
 
     @Override
